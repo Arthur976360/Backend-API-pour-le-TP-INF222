@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const app = express();
 app.use(express.json());
 
-// Connexion MySQL 
+
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
     res.send("API backend OK");
 });
 
-// Créer un article 
+ 
 app.post("/api/articles", (req, res) => {
     const { titre, contenu, auteur, categorie, tags } = req.body;
 
@@ -40,7 +40,7 @@ app.post("/api/articles", (req, res) => {
     });
 });
 
-//  Récupérer tous les articles 
+ 
 app.get("/api/articles", (req, res) => {
     const sql = "SELECT * FROM articles";
     db.query(sql, (err, results) => {
@@ -49,7 +49,6 @@ app.get("/api/articles", (req, res) => {
     });
 });
 
-//  Récupérer un article par ID
 app.get("/api/articles/:id", (req, res) => {
     const { id } = req.params;
     const sql = "SELECT * FROM articles WHERE id = ?";
@@ -60,7 +59,7 @@ app.get("/api/articles/:id", (req, res) => {
     });
 });
 
-//  Modifier un article 
+ 
 app.put("/api/articles/:id", (req, res) => {
     const { id } = req.params;
     const { titre, contenu, auteur, categorie, tags } = req.body;
@@ -73,7 +72,6 @@ app.put("/api/articles/:id", (req, res) => {
     });
 });
 
-//  Supprimer un article 
 app.delete("/api/articles/:id", (req, res) => {
     const { id } = req.params;
     const sql = "DELETE FROM articles WHERE id=?";
@@ -84,7 +82,7 @@ app.delete("/api/articles/:id", (req, res) => {
     });
 });
 
-// Lancer le serveur 
+ 
 app.listen(3000, () => {
     console.log("Serveur lancé sur http://localhost:3000");
 });
